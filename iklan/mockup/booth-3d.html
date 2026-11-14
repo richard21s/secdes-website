@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desain Booth SecDes · Tampak Depan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Open-front 6 x 3 m sponsor booth, drawn in CSS 3D (no photo), seen from the aisle. 1800 x 1100 stage. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0a0d12;overflow:hidden}
+#view{position:absolute;inset:0}
+.stage{position:absolute;left:50%;top:50%;width:1800px;height:1100px;transform-origin:0 0;overflow:hidden;font-family:"Plus Jakarta Sans",Arial,sans-serif;color:#fff}
+
+/* exhibition hall behind the booth */
+.hall{position:absolute;inset:0;background:linear-gradient(#1a1e25 0%,#262b33 38%,#3a3f47 58%,#4b5058 100%)}
+.truss{position:absolute;left:0;right:0;height:16px;opacity:.45;background:repeating-linear-gradient(60deg,#8c939c 0 2px,transparent 2px 22px),linear-gradient(#5d636b,#4a5058)}
+.lamp{position:absolute;width:26px;height:34px;border-radius:5px 5px 12px 12px;background:#15181c}
+.beam{position:absolute;width:420px;height:760px;margin-left:-197px;background:radial-gradient(ellipse at top,rgba(255,244,214,.16),transparent 70%);pointer-events:none}
+.far{position:absolute;top:470px;height:150px;border-radius:3px;filter:blur(3px);opacity:.55}
+.carpet{position:absolute;left:0;right:0;top:700px;bottom:0;background:linear-gradient(#3b4048,#2c3037)}
+.aisle{position:absolute;left:0;right:0;top:905px;bottom:0;background:linear-gradient(#5b2230,#4a1b27)}
+
+/* 3D world */
+.cam{position:absolute;left:0;top:0;width:1800px;height:1100px;perspective:1500px;perspective-origin:900px 330px}
+.world{position:absolute;left:900px;top:520px;transform-style:preserve-3d}
+.f{position:absolute;transform-style:preserve-3d;backface-visibility:hidden;overflow:hidden}
+
+/* surfaces */
+.wall-back{background:radial-gradient(18% 40% at 22% 0%,rgba(255,240,210,.22),transparent 70%),radial-gradient(18% 40% at 78% 0%,rgba(255,240,210,.22),transparent 70%),radial-gradient(70% 80% at 50% 45%,#16305a,transparent 70%),linear-gradient(160deg,#0b1626,#0f1c30 55%,#0a1422)}
+.wall-back::before{content:"";position:absolute;inset:0;opacity:.07;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:30px 30px}
+.wall-side{background:radial-gradient(60% 50% at 50% 0%,rgba(255,250,235,.9),transparent 70%),linear-gradient(90deg,#f4f6f9,#dfe5ec)}
+.floor{background:linear-gradient(#cfd6df,#e5e9ee);}
+.floor::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,28,48,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(15,28,48,.08) 1px,transparent 1px);background-size:92px 92px}
+.edge{background:linear-gradient(#e2e8f0,#cbd5e1);box-shadow:inset 0 -4px 0 #2563eb}
+.navy{background:#0f1c30}.white{background:#f8fafc}.dark{background:#111827}.blue{background:#2563eb}.grey{background:#cbd5e1}.grey2{background:#94a3b8}
+
+/* content on faces */
+.fascia{display:flex;align-items:center;justify-content:space-between;padding:0 44px;background:linear-gradient(#0f1c30,#0b1626);box-shadow:inset 0 -6px 0 #2563eb}
+.fascia img{height:52px}
+.fascia span{font:600 22px "IBM Plex Mono",monospace;color:#93c5fd;letter-spacing:.06em}
+.fascia b{font-size:26px;font-weight:800;padding:8px 18px;border-radius:999px;background:#2563eb}
+.led{position:absolute;left:50%;top:92px;width:640px;height:360px;margin-left:-320px;background:#000;border-radius:6px;padding:8px;box-shadow:0 0 0 2px #1f2937,0 0 60px rgba(59,130,246,.35)}
+.led iframe{width:1600px;height:900px;border:0;transform-origin:0 0;transform:scale(.39)}
+.qr{position:absolute;left:46px;top:150px;width:150px;text-align:center}.qr span{display:block;width:120px;height:120px;margin:0 auto;border:8px solid #fff;background:conic-gradient(#0f1c30 25%,#fff 0 50%,#0f1c30 0 75%,#fff 0) 0 0/20px 20px;border-radius:6px}.qr p{margin-top:12px;font-size:17px;font-weight:700;line-height:1.25}.qr em{font-style:normal;color:#60a5fa}
+.bwtext{position:absolute;left:40px;top:96px;width:180px;font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.bwtext em{font-style:normal;color:#60a5fa}
+.bwchips{position:absolute;right:40px;top:110px;display:flex;flex-direction:column;gap:10px;width:160px}
+.bwchips i{font-style:normal;font-weight:800;font-size:16px;padding:8px 12px;border-radius:8px;text-align:center}
+.sidecopy{position:absolute;inset:0;padding:120px 40px 40px;color:#0f1c30}
+.sidecopy img{height:58px}
+.sidecopy h4{margin-top:22px;font-size:30px;line-height:1.08;letter-spacing:-.02em}
+.sidecopy h4 em{font-style:normal;color:#2563eb}
+.sidecopy p{margin-top:12px;font-size:16px;color:#475569;line-height:1.5}
+.plist{margin-top:18px;display:grid;gap:10px}
+.plist div{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px;color:#0f172a}
+.plist img{width:36px;height:36px}
+.plist small{display:block;font-weight:500;font-size:13px;color:#64748b}
+.counter-front{background:linear-gradient(#ffffff,#eef2f7);display:grid;place-items:center;box-shadow:inset 0 -10px 0 #2563eb}
+.counter-front img{height:46px}
+.counter-front p{font-size:15px;font-weight:600;color:#334155}
+.kiosk-front{background:#0b0d10;padding:10px 10px 0}
+.kiosk-front .s{width:100%;height:150px;background:url(/assets/screens/handledesk-light.png) left top/cover;border-radius:2px}
+.kiosk-front .k{margin-top:14px;text-align:center;font:600 11px "IBM Plex Mono",monospace;color:#93c5fd}
+.kiosk-front .b{margin-top:8px;text-align:center}
+.kiosk-front .b img{width:70px}
+.hang{display:flex;align-items:center;justify-content:center;gap:24px;background:linear-gradient(#0f1c30,#13284a);box-shadow:inset 0 0 0 4px #2563eb}
+.hang img{height:46px}.hang b{font-size:26px;font-weight:800;letter-spacing:.04em}
+.cable{position:absolute;width:2px;background:#8c939c}
+.spot{background:#111}
+.cone{position:absolute;width:260px;height:420px;background:radial-gradient(ellipse at top,rgba(255,250,235,.22),transparent 70%);pointer-events:none}
+.pot{background:linear-gradient(90deg,#d6dbe1,#f2f4f7 40%,#b8bfc8)}
+.blade{position:absolute;bottom:0;width:16px;margin-left:-8px;border-radius:50% 50% 4px 4px/90% 90% 4px 4px;transform-origin:bottom center;background:linear-gradient(90deg,#1f4d2a,#3f7d3a 45%,#c8d96b 50%,#3f7d3a 55%,#1f4d2a)}
+.leaf{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4f8a4a,#1f4d2a 70%)}
+.stool-top{background:#0f1c30;border-radius:50%}
+.person{position:absolute;bottom:0;border-radius:40px 40px 8px 8px;background:linear-gradient(#2b3240,#1b2028);opacity:.92}
+.person::before{content:"";position:absolute;left:50%;top:-46px;width:40px;height:44px;margin-left:-20px;border-radius:50%;background:#2b3240}
+.staff{background:linear-gradient(#173a73,#0f2a55)}.staff::before{background:#3b2f2a}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 70% at 50% 50%,transparent 60%,rgba(0,0,0,.45))}
+</style></head>
+<body>
+<div id="view"><div class="stage" id="stage">
+  <div class="hall">
+    <div class="truss" style="top:40px"></div><div class="truss" style="top:150px;opacity:.3"></div>
+    <span class="lamp" style="left:300px;top:56px"></span><span class="lamp" style="left:900px;top:56px"></span><span class="lamp" style="left:1500px;top:56px"></span>
+    <div class="far" style="left:-40px;width:320px;background:linear-gradient(#e2e8f0,#94a3b8)"></div>
+    <div class="far" style="left:300px;width:200px;top:500px;height:120px;background:linear-gradient(#f59e0b,#b45309)"></div>
+    <div class="far" style="left:1330px;width:260px;background:linear-gradient(#f8fafc,#64748b)"></div>
+    <div class="far" style="left:1600px;width:240px;top:490px;height:130px;background:linear-gradient(#10b981,#065f46)"></div>
+    <div class="carpet"></div><div class="aisle"></div>
+  </div>
+  <div class="cam"><div class="world" id="world"></div></div>
+  <div class="vignette"></div>
+</div></div>
+
+<script>
+const T = new URLSearchParams(location.search).get('t');
+const VID = '../video/secdes-videotron.html' + (T !== null ? '?t=' + T : '');
+const world = document.getElementById('world');
+// booth: 1100 wide (6 m), 540 high (3 m), 520 deep; origin = centre of the booth volume
+const W = 1100, H = 540, D = 520, FLOOR = H / 2;
+
+function face(w, h, tf, cls = '', html = '', style = '') {
+  const d = document.createElement('div');
+  d.className = 'f ' + cls;
+  d.style.cssText = `width:${w}px;height:${h}px;left:${-w / 2}px;top:${-h / 2}px;transform:${tf};${style}`;
+  d.innerHTML = html; world.appendChild(d); return d;
+}
+// box centred at (x, y, z) with size w x h x d (y grows downward)
+function box(x, y, z, w, h, d, c = {}) {
+  face(w, h, `translate3d(${x}px,${y}px,${z + d / 2}px)`, c.front || 'white', c.frontHtml || '');
+  face(w, d, `translate3d(${x}px,${y - h / 2}px,${z}px) rotateX(90deg)`, c.top || 'grey');
+  face(d, h, `translate3d(${x - w / 2}px,${y}px,${z}px) rotateY(-90deg)`, c.side || 'grey2');
+  face(d, h, `translate3d(${x + w / 2}px,${y}px,${z}px) rotateY(90deg)`, c.side || 'grey2');
+}
+
+// floor platform (raised 12 cm) and its lit front edge
+face(W + 40, D + 30, `translate3d(0,${FLOOR}px,15px) rotateX(90deg)`, 'floor');
+face(W + 40, 26, `translate3d(0,${FLOOR + 13}px,${D / 2 + 30}px)`, 'edge');
+
+// back wall with LED video wall
+face(W, H, `translate3d(0,0,${-D / 2}px)`, 'wall-back',
+  `<div class="qr"><span></span><p>Pindai untuk <em>coba gratis 30 hari</em></p></div>
+   <div class="led"><iframe src="${VID}" scrolling="no" tabindex="-1"></iframe></div>
+   <div class="bwchips"><i style="background:#14532d;color:#86efac">Aman</i><i style="background:#713f12;color:#fde68a">Perlu Dicek</i><i style="background:#7f1d1d;color:#fecaca">Berbahaya</i></div>`);
+
+// side walls (inner faces) with branding
+face(D, H, `translate3d(${-W / 2}px,0,0) rotateY(90deg)`, 'wall-side',
+  `<div class="sidecopy"><img src="../secdes-logo-dark.png" alt=""><h4>Keamanan siber untuk <em>keuangan dan data</em></h4><p>Kenali percobaan serangan sejak langkah pertama, dalam tiga status yang jelas.</p></div>`);
+face(D, H, `translate3d(${W / 2}px,0,0) rotateY(-90deg)`, 'wall-side',
+  `<div class="sidecopy"><h4>Lima produk, <em>beli sesuai kebutuhan</em></h4><div class="plist">${
+    [['handledesk','HandleDesk','Deteksi serangan'],['vaultdesk','VaultDesk','Perlindungan data'],['exposuredesk','ExposureDesk','Celah sistem'],['leakdesk','LeakDesk','Kebocoran sandi'],['verifydesk','VerifyDesk','Anti-fraud transfer']]
+    .map(([f, n, d]) => `<div><img src="/assets/products/${f}.svg" alt=""><span>${n}<small>${d}</small></span></div>`).join('')}</div></div>`);
+// wall thickness at the front edges
+box(-W / 2 - 15, 0, D / 2 - 10, 30, H, 20, { front: 'white', top: 'white', side: 'grey' });
+box(W / 2 + 15, 0, D / 2 - 10, 30, H, 20, { front: 'white', top: 'white', side: 'grey' });
+
+// front fascia beam across the open front
+box(0, -H / 2 + 40, D / 2 - 10, W + 60, 80, 24, { front: 'fascia', frontHtml:
+  `<img src="../secdes-logo.png" alt=""><span>STAN B12 · DEMO DETEKSI LANGSUNG</span><b>Coba gratis 30 hari</b>`, top: 'navy', side: 'navy' });
+
+// reception counter, front left
+box(-300, FLOOR - 62, D / 2 - 120, 300, 124, 80, { front: 'counter-front', frontHtml:
+  `<div style="display:flex;flex-direction:column;align-items:center;gap:10px"><img src="../secdes-logo-dark.png" alt=""><p style="margin:0">Tanya tim kami</p></div>`, top: 'dark', side: 'grey' });
+
+// two demo kiosks, front right
+[[200, 'Simulasi HandleDesk'], [330, 'Cek kesiapan Anda']].forEach(([x, k]) => {
+  box(x, FLOOR - 120, D / 2 - 140, 96, 240, 40, { front: 'kiosk-front', frontHtml:
+    `<div class="s"></div><p class="k">${k}</p><p class="b"><img src="../secdes-logo.png" alt=""></p>`, top: 'dark', side: 'dark' });
+});
+
+// tall planters with sansevieria-style blade leaves in the front corners
+[-500, 500].forEach((x) => {
+  box(x, FLOOR - 45, D / 2 - 30, 56, 90, 56, { front: 'pot', top: 'dark', side: 'pot' });
+  const blades = [[-26, 150, -14], [-12, 190, -6], [0, 210, 2], [12, 180, 8], [24, 150, 15], [-4, 160, -2], [8, 140, 5]]
+    .map(([dx, h, r]) => `<span class="blade" style="left:${70 + dx}px;height:${h}px;transform:rotate(${r}deg)"></span>`).join('');
+  face(140, 220, `translate3d(${x}px,${FLOOR - 200}px,${D / 2 - 30}px)`, '', blades, 'overflow:visible');
+});
+// soft contact shadows on the platform
+[[-300, D / 2 - 120, 360, 120], [265, D / 2 - 140, 300, 90], [-500, D / 2 - 30, 110, 110], [500, D / 2 - 30, 110, 110]].forEach(([x, z, w, d]) => {
+  face(w, d, `translate3d(${x}px,${FLOOR - 1}px,${z}px) rotateX(90deg)`, '', '', 'background:radial-gradient(closest-side,rgba(15,23,42,.35),transparent)');
+});
+
+// hanging sign above the booth
+face(520, 92, `translate3d(0,${-H / 2 - 150}px,0)`, 'hang', `<img src="../secdes-logo.png" alt=""><b>STAN B12</b>`);
+face(2, 120, `translate3d(-220px,${-H / 2 - 256}px,0)`, 'grey2'); face(2, 120, `translate3d(220px,${-H / 2 - 256}px,0)`, 'grey2');
+
+// fit stage to window
+const stage = document.getElementById('stage');
+const fit = () => { const s = Math.min(innerWidth / 1800, innerHeight / 1100); stage.style.transform = `translate(${-900 * s}px,${-550 * s}px) scale(${s})`; };
+addEventListener('resize', fit); fit();
+</script>
+</body></html>

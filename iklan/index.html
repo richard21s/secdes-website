@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeri Materi SecDes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{--navy:#0f1c30;--blue:#2563eb;--ink:#0f172a;--ink2:#475569;--line:#e2e8f0;--bg:#f5f7fa;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",Arial,sans-serif}
+a{color:inherit}
+header{background:var(--navy);color:#fff;padding:34px 24px 30px}
+.in{max-width:1200px;margin:0 auto}
+header img{height:40px}
+header h1{margin-top:18px;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.025em;line-height:1.1}
+header p{margin-top:10px;color:#cbd5e1;max-width:70ch;line-height:1.55}
+header nav{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+header nav a{padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.1);text-decoration:none;font-size:14px;font-weight:600}
+header nav a:hover{background:rgba(255,255,255,.2)}
+main{padding:10px 24px 60px}
+section{margin-top:40px}
+h2{font-size:24px;letter-spacing:-.02em}
+h2 small{display:block;font-size:14px;font-weight:500;color:var(--ink2);margin-top:4px;letter-spacing:0}
+h3{font-size:16px}
+.grid{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.card .meta p{font-size:14px;color:var(--ink2);line-height:1.5}
+.tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:#eff6ff;color:#1d4ed8}
+.tag.sup{background:#f1f5f9;color:#475569}
+.open{margin-top:4px;margin-right:14px;align-self:flex-start;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+.open:hover{text-decoration:underline}
+.shot{position:relative;width:100%;overflow:hidden;background:#0b1220}
+.shot iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0}
+
+/* player */
+.player{margin-top:18px;background:var(--navy);border-radius:16px;padding:18px;color:#fff}
+.ptabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.ptabs button{font:600 14px "Plus Jakarta Sans";padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;cursor:pointer}
+.ptabs button.on{background:#fff;color:var(--navy)}
+.stagebox{display:grid;place-items:center;background:#050a14;border-radius:10px;padding:14px;min-height:300px}
+.screen{background:#000;border-radius:6px;overflow:hidden;box-shadow:0 0 0 6px #111,0 20px 40px rgba(0,0,0,.5);max-width:100%}
+.screen iframe{width:100%;height:100%;border:0;display:block}
+.ctl{margin-top:14px;display:flex;align-items:center;gap:12px}
+.ctl button{width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:16px;cursor:pointer;display:grid;place-items:center}
+.ctl input{flex:1;accent-color:#60a5fa}
+.ctl span{font:600 13px "IBM Plex Mono",monospace;color:#cbd5e1;min-width:86px;text-align:right}
+.scenes{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.scenes button{font:500 12px "Plus Jakarta Sans";padding:6px 10px;border-radius:8px;border:0;background:rgba(255,255,255,.08);color:#cbd5e1;cursor:pointer}
+.scenes button:hover{background:rgba(255,255,255,.16)}
+footer{padding:24px;text-align:center;font-size:13px;color:var(--ink2)}
+</style></head>
+<body>
+<header><div class="in">
+  <img src="secdes-logo.png" alt="SecDes">
+  <h1>Materi Komunikasi Pemasaran SecDes</h1>
+  <p>Bab IV Creative Communication Paper: iklan brand awareness, iklan respons, dan pesan pemasaran langsung. Semua video dan mockup dapat diputar dan dibuka dalam layar penuh.</p>
+  <nav><a href="#awareness">4.1 Brand awareness</a><a href="#response">4.2 Response advertisement</a><a href="#direct">4.3 Direct marketing</a></nav>
+</div></header>
+
+<main class="in">
+  <section id="awareness">
+    <h2>4.1 High-Profile Brand Awareness Advertisement<small>Video videotron 20 detik tanpa suara. Rasio menyesuaikan media: 16:9 untuk billboard dan lobi, 9:16 untuk lift, 1:1 untuk LinkedIn.</small></h2>
+
+    <div class="player">
+      <div class="ptabs" id="ratios">
+        <button class="on" data-r="16:9">16:9 Billboard / lobi</button>
+        <button data-r="9:16">9:16 Lift</button>
+        <button data-r="1:1">1:1 LinkedIn</button>
+      </div>
+      <div class="stagebox"><div class="screen" id="screen"><iframe id="spot" src="video/secdes-videotron.html?ext=1" title="Video iklan SecDes" scrolling="no"></iframe></div></div>
+      <div class="ctl">
+        <button id="pp" aria-label="Putar atau jeda">❚❚</button>
+        <button id="rs" aria-label="Putar dari awal">↺</button>
+        <input id="seek" type="range" min="0" max="20" step="0.05" value="0" aria-label="Posisi video">
+        <span id="tm">0:00 / 0:20</span>
+      </div>
+      <div class="scenes">
+        <button data-t="0">0:00 Pukul 02.09</button><button data-t="3">0:03 Peretas mencoba masuk</button><button data-t="8.4">0:08 SecDes menghentikan</button><button data-t="11.5">0:11 Headline</button><button data-t="16.2">0:16 Logo dan tagline</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="shot" data-src="mockup/billboard.html" data-w="1800" data-h="1430"></div>
+        <div class="meta"><span class="tag">Media utama</span><h3>Videotron di koridor bisnis</h3><p>Layar LED melengkung di fasad gedung persimpangan ramai, ditambah layar strip di bawahnya.</p><a class="open" href="mockup/billboard.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/lift.html" data-w="1100" data-h="760"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Layar digital di lift</h3><p>Versi vertikal 9:16 pada panel dinding lift gedung perkantoran.</p><a class="open" href="mockup/lift.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/lobi.html" data-w="1800" data-h="1013"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Layar di lobi gedung</h3><p>Layar 16:9 di dinding belakang meja resepsionis lobi perkantoran.</p><a class="open" href="mockup/lobi.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/lift-lobi.html" data-w="1200" data-h="863"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Layar dinding di lobi lift</h3><p>Layar vertikal berbingkai di dinding samping dan di antara pintu lift.</p><a class="open" href="mockup/lift-lobi.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/totem.html" data-w="1500" data-h="1090"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Kiosk totem di lobi gedung</h3><p>Totem digital berdiri di tengah lobi, memutar video versi vertikal.</p><a class="open" href="mockup/totem.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/booth-3d.html" data-w="1800" data-h="1100"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Booth sponsor pameran industri</h3><p>Desain booth terbuka 6 × 3 m tampak depan: dinding LED, meja resepsionis, dua kiosk demo, dan dinding samping bermerek.</p><a class="open" href="mockup/booth-3d.html" target="_blank">Buka layar penuh ↗</a></div></div>
+    </div>
+  </section>
+
+  <section id="response">
+    <h2>4.2 Hard-Working Response Advertisement<small>Mengajak audiens langsung mengajukan uji coba gratis Akun Jebakan HandleDesk.</small></h2>
+    <div class="grid">
+      <div class="card"><div class="shot" data-src="2a-google-search-ads.html" data-w="1600" data-h="1000"></div>
+        <div class="meta"><span class="tag">Media utama</span><h3>Google Search Ads</h3><p>Iklan teks bersponsor untuk kata kunci “deteksi serangan siber”, “keamanan siber OJK”, “honeypot”, dan “layanan SOC”.</p><a class="open" href="2a-google-search-ads.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="mockup/linkedin.html" data-w="1300" data-h="1100"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>LinkedIn Sponsored Content (video)</h3><p>Video 1:1 di feed LinkedIn. Tombol “Ajukan Uji Coba” langsung membuka website SecDes.</p><a class="open" href="mockup/linkedin.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="2c-retargeting-display.html" data-w="1600" data-h="1060"></div>
+        <div class="meta"><span class="tag sup">Media pendukung</span><h3>Retargeting display</h3><p>Banner 728 × 90 dan 300 × 250 bagi pengunjung website yang belum mendaftar.</p><a class="open" href="2c-retargeting-display.html" target="_blank">Buka layar penuh ↗</a></div></div>
+    </div>
+  </section>
+
+  <section id="direct">
+    <h2>4.3 Direct Marketing Message<small>Email bumper yang dipersonalisasi untuk calon pembeli baru, dibuka di Gmail.</small></h2>
+    <div class="grid">
+      <div class="card"><div class="shot" data-src="3b-gmail-bumper.html" data-w="1600" data-h="1240"></div>
+        <div class="meta"><span class="tag">Media utama</span><h3>Email di Gmail penerima</h3><p>Email HTML berformat bumper dari kabar@secdes.co.id kepada Andika Pratama.</p><a class="open" href="3b-gmail-bumper.html" target="_blank">Buka layar penuh ↗</a></div></div>
+      <div class="card"><div class="shot" data-src="3-email-bumper.html" data-w="640" data-h="900"></div>
+        <div class="meta"><span class="tag sup">Desain email</span><h3>Email bumper lengkap</h3><p>Tujuh bumper dari banner utama sampai footer berhenti berlangganan. Gulir di dalam pratinjau atau buka layar penuh.</p><a class="open" href="3-email-bumper.html" target="_blank">Buka layar penuh ↗</a></div></div>
+    </div>
+  </section>
+</main>
+<footer>Foto latar mockup: Unsplash (lisensi bebas). Nama penerima, perusahaan, dan data dalam materi ini bersifat fiktif.</footer>
+
+<script src="video/player.js"></script>
+<script>
+  // scaled previews: each page renders at its natural size and is scaled to the card width
+  const shots = [...document.querySelectorAll('.shot')];
+  shots.forEach((s) => {
+    const f = document.createElement('iframe');
+    f.src = s.dataset.src; f.width = s.dataset.w; f.height = s.dataset.h; f.loading = 'lazy'; f.title = s.nextElementSibling.querySelector('h3').textContent;
+    s.appendChild(f);
+  });
+  const fit = () => shots.forEach((s) => {
+    const k = s.clientWidth / s.dataset.w;
+    s.style.height = s.dataset.h * k + 'px';
+    s.firstChild.style.transform = `scale(${k})`;
+  });
+  addEventListener('resize', fit); fit();
+
+  // videotron player with ratio switch
+  const screen = document.getElementById('screen');
+  const sizeScreen = (r) => {
+    const [a, b] = r.split(':').map(Number);
+    const box = screen.parentElement, maxW = box.clientWidth - 28, maxH = Math.min(innerHeight * .7, 620);
+    let w = maxW, h = w * b / a; if (h > maxH) { h = maxH; w = h * a / b; }
+    screen.style.width = w + 'px'; screen.style.height = h + 'px';
+  };
+  let ratio = '16:9';
+  document.querySelectorAll('#ratios button').forEach((b) => b.onclick = () => {
+    document.querySelectorAll('#ratios button').forEach((x) => x.classList.toggle('on', x === b));
+    ratio = b.dataset.r; sizeScreen(ratio);
+  });
+  addEventListener('resize', () => sizeScreen(ratio)); sizeScreen(ratio);
+
+  const seek = document.getElementById('seek'), pp = document.getElementById('pp');
+  const P = new SpotPlayer([document.getElementById('spot')], { onTick: (t, playing) => {
+    if (document.activeElement !== seek) seek.value = t;
+    document.getElementById('tm').textContent = fmtTime(t) + ' / 0:20';
+    pp.textContent = playing ? '❚❚' : '▶';
+  } });
+  pp.onclick = () => P.toggle();
+  document.getElementById('rs').onclick = () => P.restart();
+  seek.oninput = () => P.seek(parseFloat(seek.value));
+  document.querySelectorAll('.scenes button').forEach((b) => b.onclick = () => { P.seek(parseFloat(b.dataset.t)); P.play(); });
+</script>
+</body></html>

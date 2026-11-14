@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>SecDes · Email Direct Marketing (bumper)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* HTML marketing email, 600 px wide, built from stacked "bumper" banners
+     the way retail promo emails are. Rendered at 2x for print. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #eef1f5; font-family: "Plus Jakarta Sans", Arial, sans-serif; color: #0f172a; }
+  .mail { width: 600px; margin: 0 auto; background: #fff; }
+  a { color: inherit; text-decoration: none; }
+
+  .pre { width: 600px; margin: 0 auto; display: flex; justify-content: space-between; padding: 10px 14px; font-size: 11px; color: #64748b; background: #eef1f5; }
+  .pre u { color: #334155; }
+
+  .head { padding: 22px 0 0; text-align: center; }
+  .head img { height: 40px; }
+  .nav { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+  .nav span { padding: 12px 0; font: 700 11px "Plus Jakarta Sans"; letter-spacing: .12em; color: #0f1c30; }
+  .nav span + span { border-left: 1px solid #e2e8f0; }
+
+  /* hero bumper */
+  .hero { position: relative; height: 640px; padding: 44px 40px; color: #fff; overflow: hidden;
+    background: radial-gradient(360px 300px at 85% 60%, rgba(37,99,235,.45), transparent 70%), linear-gradient(165deg, #0b1626, #0f1c30 60%, #0a1422); }
+  .hero::before { content: ""; position: absolute; inset: 0; opacity: .07; background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 30px 30px; }
+  .hero > * { position: relative; }
+  .tag { display: inline-block; padding: 7px 14px; border-radius: 999px; background: #2563eb; font-weight: 800; font-size: 13px; letter-spacing: .12em; }
+  .hero h1 { margin-top: 22px; font-size: 44px; line-height: 1.06; font-weight: 800; letter-spacing: -.03em; }
+  .hero h1 em { font-style: normal; color: #60a5fa; }
+  .hero .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: #cbd5e1; max-width: 470px; }
+  .log { margin-top: 30px; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: #64748b; }
+  .log div { display: grid; grid-template-columns: 62px 1fr; padding: 10px 0; border-top: 1px solid rgba(148,163,184,.16); }
+  .log .hit { margin: 6px -14px; padding: 14px; border: 2px solid #ef4444; border-radius: 10px; background: rgba(239,68,68,.12); color: #fff; box-shadow: 0 0 30px rgba(239,68,68,.3); }
+  .log .hit b { display: inline-block; margin-top: 6px; padding: 3px 9px; border-radius: 5px; background: #ef4444; font: 700 12px "Plus Jakarta Sans"; }
+  .btn { display: inline-block; padding: 16px 30px; border-radius: 999px; background: #2563eb; color: #fff; font-weight: 700; font-size: 16px; }
+  .hero .btn { position: absolute; left: 40px; bottom: 62px; }
+  .hero .note { position: absolute; left: 44px; bottom: 30px; font-size: 13px; color: #94a3b8; }
+
+  /* personal greeting */
+  .greet { padding: 36px 40px 30px; font-size: 15px; line-height: 1.7; color: #334155; }
+  .greet b { color: #0f172a; }
+  .greet p + p { margin-top: 12px; }
+
+  /* benefits bumper */
+  .ben { background: #eff6ff; padding: 32px 26px 34px; }
+  .ben h2, .sec h2 { text-align: center; font-size: 22px; letter-spacing: -.02em; }
+  .ben .row { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .ben .row div { background: #fff; border-radius: 12px; padding: 18px 14px; text-align: center; }
+  .ben .n { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #0f1c30; color: #fff; font-weight: 800; }
+  .ben b { display: block; margin-top: 12px; font-size: 14px; }
+  .ben p { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: #475569; }
+
+  /* report bumper */
+  .rep { padding: 34px 30px 36px; text-align: center; }
+  .rep h2 { font-size: 22px; letter-spacing: -.02em; }
+  .rep .lead { margin-top: 8px; font-size: 14px; color: #475569; }
+  .rep .shot { margin-top: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 14px 30px rgba(15,23,42,.12); }
+  .rep .shot img { display: block; width: 100%; }
+  .rep .stat { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .rep .stat div { padding: 12px 6px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+  .rep .stat b { display: block; font-size: 22px; color: #0f1c30; }
+  .rep .stat span { font-size: 11.5px; color: #64748b; }
+
+  /* promo grid */
+  .sec { background: #0f1c30; color: #fff; padding: 30px 26px 14px; }
+  .sec h2 { color: #fff; }
+  .sec .lead { margin-top: 6px; text-align: center; font-size: 14px; color: #bfdbfe; }
+  .grid { background: #0f1c30; padding: 12px 26px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { background: #fff; border-radius: 12px; padding: 18px; color: #0f172a; }
+  .card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: center; }
+  .card img { width: 48px; height: 48px; }
+  .card.wide img { width: 64px; height: 64px; }
+  .card b { display: block; margin-top: 10px; font-size: 16px; }
+  .card.wide b { margin-top: 0; font-size: 20px; }
+  .card small { display: block; font-size: 12px; color: #64748b; margin-top: 2px; }
+  .price { margin-top: 10px; }
+  .price s { font-size: 12px; color: #94a3b8; }
+  .price strong { display: block; font-size: 19px; color: #1d4ed8; }
+  .price strong span { font-size: 12px; font-weight: 500; color: #64748b; }
+  .pill { display: inline-block; margin-top: 10px; padding: 3px 9px; border-radius: 999px; background: #dcfce7; color: #166534; font-size: 11px; font-weight: 700; }
+  .card.wide .btn { padding: 12px 18px; font-size: 14px; }
+
+  /* urgency bumper */
+  .urg { display: grid; grid-template-columns: 120px 1fr; gap: 22px; align-items: center; padding: 30px 36px; background: #fff7ed; border-top: 4px solid #f59e0b; }
+  .cal { border-radius: 12px; overflow: hidden; text-align: center; background: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+  .cal span { display: block; padding: 6px 0; background: #dc2626; color: #fff; font-weight: 700; font-size: 13px; letter-spacing: .1em; }
+  .cal b { display: block; padding: 8px 0 10px; font-size: 44px; color: #0f172a; }
+  .urg h3 { font-size: 20px; letter-spacing: -.01em; }
+  .urg p { margin-top: 6px; font-size: 14px; color: #475569; line-height: 1.5; }
+  .urg .btn { margin-top: 14px; padding: 13px 22px; font-size: 14px; }
+  .urg .alt { display: block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #1d4ed8; text-decoration: underline; }
+
+  /* footer */
+  .foot { background: #0b1626; color: #94a3b8; text-align: center; padding: 30px 40px 34px; font-size: 12px; line-height: 1.7; }
+  .foot img { height: 30px; }
+  .soc { margin: 16px 0; display: flex; justify-content: center; gap: 12px; }
+  .soc span { width: 34px; height: 34px; border-radius: 50%; border: 1px solid #334155; display: grid; place-items: center; color: #e2e8f0; font-weight: 700; font-size: 12px; }
+  .foot u { color: #cbd5e1; }
+  .trep { margin-top: 20px; text-align: left; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 14px 30px rgba(15,23,42,.10); }
+  .trep-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 14px 18px; background: #0f1c30; color: #fff; }
+  .trep-h b { font-size: 15px; } .trep-h span { font-size: 11.5px; color: #bfdbfe; }
+  .trep-s { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px 18px 6px; }
+  .trep-s div { padding: 12px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+  .trep-s b { display: block; font-size: 24px; color: #0f1c30; } .trep-s span { font-size: 11.5px; color: #64748b; line-height: 1.4; display: block; }
+  .trep table { width: calc(100% - 36px); margin: 10px 18px 4px; border-collapse: collapse; font-size: 12px; }
+  .trep th { text-align: left; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: #64748b; padding: 8px 6px; border-bottom: 1px solid #e2e8f0; }
+  .trep td { padding: 9px 6px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+  .trep td:nth-child(2) { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: #0f172a; }
+  .trep td i { font-style: normal; font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 5px; background: #fee2e2; color: #b91c1c; }
+  .trep-sum { margin: 12px 18px 18px; padding: 12px 14px; border-left: 4px solid #2563eb; background: #eff6ff; border-radius: 6px; font-size: 13px; line-height: 1.55; color: #334155; }
+  .trep-sum b { display: block; color: #0f172a; margin-bottom: 2px; }
+  .rep .next { margin-top: 18px; font-size: 13.5px; line-height: 1.55; color: #475569; }
+</style></head>
+<body>
+  <div class="pre"><span>Akun Jebakan gratis 30 hari dan hemat 20% untuk langganan tahunan.</span><u>Lihat email ini di browser</u></div>
+  <div class="mail">
+    <div class="head">
+      <img src="secdes-logo-dark.png" alt="SecDes">
+      <div class="nav"><span>PRODUK</span><span>HARGA</span><span>SIMULASI</span><span>KONTAK</span></div>
+    </div>
+
+    <section class="hero">
+      <span class="tag">GRATIS 30 HARI</span>
+      <h1>Semalam, berapa kali ada yang <em>mencoba masuk?</em></h1>
+      <p class="sub">Pasang Akun Jebakan HandleDesk di sistem Anda dan lihat sendiri jawabannya, tanpa mengubah sistem inti.</p>
+      <div class="log">
+        <div><span>01.58</span><span>Login admin kantor pusat</span></div>
+        <div><span>02.07</span><span>Pencadangan basis data selesai</span></div>
+        <div class="hit"><span>02.09</span><span>Akun jebakan admin_backup dicoba login<br><b>Berbahaya · sumber diblokir</b></span></div>
+      </div>
+      <a class="btn">Ajukan Uji Coba Gratis</a>
+      <span class="note">Tanpa kartu kredit · aktif dalam hitungan hari</span>
+    </section>
+
+    <section class="greet">
+      <p>Halo <b>Pak Andika</b>,</p>
+      <p>Perkenalkan, kami <b>SecDes (Security Desk)</b>, penyedia perangkat lunak keamanan siber untuk institusi keuangan dan pengelola data di Indonesia. Kami menghubungi Bapak karena perusahaan multifinance seperti <b>PT Contoh Multifinance</b> setiap hari menjadi sasaran percobaan login ke portal, VPN, dan aplikasi, yang sering tidak terlihat di antara ratusan alert.</p>
+      <p>Agar Bapak dapat melihatnya sendiri, kami menawarkan <b>uji coba Akun Jebakan HandleDesk selama 30 hari tanpa biaya</b>. Tidak ada karyawan yang memakai akun ini, sehingga setiap percobaan akses yang tercatat pasti mencurigakan.</p>
+    </section>
+
+    <section class="ben">
+      <h2>Cara kerjanya dalam 3 langkah</h2>
+      <div class="row">
+        <div><span class="n">1</span><b>Pasang</b><p>Tim kami memasang akun dan halaman login tiruan dalam hitungan hari.</p></div>
+        <div><span class="n">2</span><b>Pantau</b><p>Setiap sentuhan pada akun jebakan langsung ditandai Berbahaya.</p></div>
+        <div><span class="n">3</span><b>Laporkan</b><p>Hasil 30 hari dirangkum dalam bahasa risiko bisnis untuk direksi.</p></div>
+      </div>
+    </section>
+
+    <section class="rep">
+      <h2>Yang Anda terima di akhir uji coba</h2>
+      <p class="lead">Contoh laporan 30 hari Akun Jebakan HandleDesk</p>
+      <div class="trep">
+        <div class="trep-h"><b>Laporan Uji Coba Akun Jebakan</b><span>PT Contoh Multifinance · 10 Nov – 9 Des 2026</span></div>
+        <div class="trep-s">
+          <div><b>3</b><span>akun jebakan dipasang</span></div>
+          <div><b>14</b><span>percobaan akses tercatat</span></div>
+          <div><b>4</b><span>sumber berbeda, 1 dari jaringan internal</span></div>
+        </div>
+        <table>
+          <tr><th>Waktu</th><th>Akun jebakan</th><th>Sumber</th><th>Status</th></tr>
+          <tr><td>14 Nov · 02.09</td><td>admin_backup</td><td>203.0.113.9 · luar negeri</td><td><i>Berbahaya</i></td></tr>
+          <tr><td>21 Nov · 14.22</td><td>keuangan.lama</td><td>10.12.4.77 · jaringan internal</td><td><i>Berbahaya</i></td></tr>
+          <tr><td>29 Nov · 23.40</td><td>vpn_test</td><td>198.51.100.24 · hosting</td><td><i>Berbahaya</i></td></tr>
+          <tr><td>3 Des · 03.15</td><td>admin_backup</td><td>203.0.113.9 · berulang</td><td><i>Berbahaya</i></td></tr>
+        </table>
+        <div class="trep-sum"><b>Ringkasan untuk direksi</b>Selama 30 hari, akun yang tidak dipakai siapa pun dicoba 14 kali. Satu percobaan berasal dari jaringan kantor sendiri dan perlu ditindaklanjuti tim TI.</div>
+      </div>
+      <p class="next">Ingin semua aktivitas terpantau, bukan hanya akun jebakan? Setelah uji coba, Anda dapat melanjutkan ke <b>HandleDesk lengkap</b> yang mengenali 10 jenis percobaan serangan.</p>
+    </section>
+
+    <section class="sec">
+      <h2>Penawaran akhir tahun</h2>
+      <p class="lead">Hemat 20% untuk langganan 12 bulan, berlaku untuk semua produk</p>
+    </section>
+    <div class="grid">
+      <div class="card wide">
+        <img src="/assets/products/handledesk.svg" alt="">
+        <div><b>HandleDesk</b><small>Deteksi serangan · Best Seller</small>
+          <div class="price"><s>Rp25 juta</s><strong>Rp20 juta <span>/bulan</span></strong></div></div>
+        <a class="btn">Coba Gratis</a>
+      </div>
+      <div class="card"><img src="/assets/products/vaultdesk.svg" alt=""><b>VaultDesk</b><small>Perlindungan data</small>
+        <div class="price"><s>Rp35 juta</s><strong>Rp28 juta <span>/bulan</span></strong></div><span class="pill">Hemat 20%</span></div>
+      <div class="card"><img src="/assets/products/exposuredesk.svg" alt=""><b>ExposureDesk</b><small>Pencegahan celah</small>
+        <div class="price"><s>Rp12 juta</s><strong>Rp9,6 juta <span>/bulan</span></strong></div><span class="pill">Hemat 20%</span></div>
+      <div class="card"><img src="/assets/products/leakdesk.svg" alt=""><b>LeakDesk</b><small>Pemantau kebocoran</small>
+        <div class="price"><s>Rp10 juta</s><strong>Rp8 juta <span>/bulan</span></strong></div><span class="pill">Hemat 20%</span></div>
+      <div class="card"><img src="/assets/products/verifydesk.svg" alt=""><b>VerifyDesk</b><small>Anti-fraud transfer</small>
+        <div class="price"><s>Rp10 juta</s><strong>Rp8 juta <span>/bulan</span></strong></div><span class="pill">Hemat 20%</span></div>
+    </div>
+
+    <section class="urg">
+      <div class="cal"><span>DES</span><b>20</b></div>
+      <div>
+        <h3>Slot uji coba gelombang Desember ditutup 20 Desember 2026</h3>
+        <p>Ajukan sekarang agar Akun Jebakan aktif sebelum libur akhir tahun, saat tim keamanan paling sedikit berjaga.</p>
+        <a class="btn">Ajukan Uji Coba Gratis</a><span class="alt">atau jadwalkan demo 20 menit</span>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <img src="secdes-logo.png" alt="SecDes">
+      <div class="soc"><span>in</span><span>IG</span><span>YT</span></div>
+      <p>SecDes (Security Desk) · Menara SecDes, Lantai 12, Jl. Jenderal Sudirman, Jakarta Selatan</p>
+      <p>Email ini dikirim ke andika.pratama@contoh-multifinance.co.id karena jabatan Anda di bidang keamanan informasi. Jika tidak ingin menerima email dari SecDes lagi, klik Berhenti berlangganan.</p>
+      <p><u>Berhenti berlangganan</u> · <u>Atur preferensi email</u> · <u>Kebijakan privasi</u></p>
+    </footer>
+  </div>
+</body></html>

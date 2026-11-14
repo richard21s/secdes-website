@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecDes · Iklan Videotron</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* SecDes videotron spot, 20 s loop, no sound.
+   Adapts to any frame: landscape (billboard, lobby), portrait (lift), square (LinkedIn).
+   The clock is shared (wall-clock based) so every screen in a mockup plays in sync.
+   URL options: ?t=9.5 freezes one frame (for stills) · ?local=1 starts from 0 on load. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#070d18}
+body{--u:1vmin;font-family:"Plus Jakarta Sans",Arial,sans-serif;color:#fff;position:relative}
+.bg{position:absolute;inset:0;background:radial-gradient(70% 60% at 70% 55%,rgba(37,99,235,.28),transparent 70%),linear-gradient(160deg,#08111f,#0f1c30 60%,#070d18)}
+.grid{position:absolute;inset:0;opacity:.07;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:calc(var(--u)*6) calc(var(--u)*6)}
+.redwash{position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 50%,rgba(239,68,68,.35),transparent 70%);opacity:0}
+.scan{position:absolute;left:0;right:0;height:calc(var(--u)*18);background:linear-gradient(180deg,transparent,rgba(96,165,250,.35),transparent);opacity:0}
+.scene{position:absolute;inset:0;opacity:0}
+
+/* persistent brand */
+.brand{position:absolute;top:calc(var(--u)*4);left:calc(var(--u)*4.5);z-index:5;display:flex;align-items:center;gap:calc(var(--u)*2)}
+.brand img{height:calc(var(--u)*8)}
+.brand span{font:500 calc(var(--u)*2) "IBM Plex Mono",monospace;color:#93c5fd;letter-spacing:.08em}
+.url{position:absolute;right:calc(var(--u)*4.5);bottom:calc(var(--u)*3.6);z-index:5;font:500 calc(var(--u)*2.4) "IBM Plex Mono",monospace;color:#cbd5e1}
+
+/* scene 1: the clock */
+.s1{display:grid;place-items:center;text-align:center}
+.clock{font:600 calc(var(--u)*22) "IBM Plex Mono",monospace;letter-spacing:-.04em;color:#e2e8f0}
+.clock small{font-size:.28em;color:#64748b;margin-left:.2em}
+.s1 p{margin-top:calc(var(--u)*2);font-size:calc(var(--u)*4.4);color:#94a3b8;font-weight:500}
+
+/* scene 2: the attack */
+.s2{display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*5);padding:calc(var(--u)*13) calc(var(--u)*6) calc(var(--u)*7)}
+.term{flex:1;max-width:calc(var(--u)*110);height:100%;max-height:calc(var(--u)*62);border-radius:calc(var(--u)*1.6);background:rgba(4,8,15,.85);border:1px solid rgba(148,163,184,.25);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 calc(var(--u)*6) rgba(0,0,0,.5)}
+.term-h{display:flex;gap:calc(var(--u)*1);align-items:center;padding:calc(var(--u)*1.4) calc(var(--u)*2);background:rgba(148,163,184,.1);font:500 calc(var(--u)*1.9) "IBM Plex Mono",monospace;color:#94a3b8}
+.term-h i{width:calc(var(--u)*1.4);height:calc(var(--u)*1.4);border-radius:50%;background:#475569}
+.term-b{flex:1;padding:calc(var(--u)*1.6) calc(var(--u)*2.2);font:500 calc(var(--u)*2.15)/1.55 "IBM Plex Mono",monospace;color:#64748b;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.term-b .f{color:#f87171}
+.term-b .ok{color:#86efac}
+.term-b .blk{color:#fff;background:#dc2626;padding:0 .4em;align-self:flex-start;font-weight:600}
+.side{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*3);width:calc(var(--u)*44)}
+.hacker{width:calc(var(--u)*30);filter:drop-shadow(0 0 calc(var(--u)*3) rgba(239,68,68,.45))}
+.count{text-align:center}
+.count b{display:block;font:600 calc(var(--u)*11) "IBM Plex Mono",monospace;color:#f87171;line-height:1}
+.count span{font-size:calc(var(--u)*2.6);color:#cbd5e1}
+.caption{position:absolute;left:0;right:0;bottom:calc(var(--u)*9);text-align:center;font-size:calc(var(--u)*4.4);font-weight:700;letter-spacing:-.01em}
+
+/* scene 3: detection */
+.alert{position:absolute;left:50%;top:52%;width:min(calc(var(--u)*92),88%);transform:translate(-50%,-50%);border-radius:calc(var(--u)*2);background:#0b1626;border:calc(var(--u)*.45) solid #ef4444;padding:calc(var(--u)*4);box-shadow:0 0 calc(var(--u)*10) rgba(239,68,68,.45);z-index:3;opacity:0}
+.alert .row1{display:flex;justify-content:space-between;align-items:center;gap:calc(var(--u)*2)}
+.badge{padding:calc(var(--u)*.8) calc(var(--u)*1.8);border-radius:calc(var(--u)*.8);background:#ef4444;font-weight:800;font-size:calc(var(--u)*2.8)}
+.alert .hd{font:600 calc(var(--u)*2.2) "IBM Plex Mono",monospace;color:#93c5fd}
+.alert h3{margin-top:calc(var(--u)*2.4);font-size:calc(var(--u)*5);line-height:1.15;letter-spacing:-.02em}
+.alert p{margin-top:calc(var(--u)*1.6);font-size:calc(var(--u)*2.7);color:#cbd5e1}
+.stamp{margin-top:calc(var(--u)*3);display:inline-flex;align-items:center;gap:calc(var(--u)*1.4);padding:calc(var(--u)*1.2) calc(var(--u)*2.4);border:calc(var(--u)*.35) solid #22c55e;border-radius:calc(var(--u)*1);color:#86efac;font-weight:800;font-size:calc(var(--u)*3.2);letter-spacing:.06em;transform-origin:left center}
+
+/* scene 4: headline */
+.s4{display:flex;flex-direction:column;justify-content:center;padding:0 calc(var(--u)*9)}
+.s4 h1{font-size:calc(var(--u)*11.5);line-height:1.02;font-weight:800;letter-spacing:-.04em;max-width:16ch}
+.s4 h1 span{display:inline-block;opacity:0;margin-right:.22em}
+.s4 h1 em{font-style:normal;color:#60a5fa}
+.s4 p{margin-top:calc(var(--u)*4);font-size:calc(var(--u)*4.4);color:#cbd5e1;font-weight:500}
+
+/* scene 5: end card */
+.s5{display:grid;place-items:center;text-align:center;align-content:center;gap:calc(var(--u)*3)}
+.s5 img{height:calc(var(--u)*17)}
+.s5 .tag{font-size:calc(var(--u)*4.2);font-weight:700}
+.s5 .tag em{font-style:normal;color:#60a5fa}
+.s5 .sub{font-size:calc(var(--u)*2.8);color:#94a3b8}
+.s5 .u{margin-top:calc(var(--u)*1);display:inline-block;padding:calc(var(--u)*1.2) calc(var(--u)*3);border:1px solid rgba(147,197,253,.5);border-radius:999px;font:600 calc(var(--u)*3) "IBM Plex Mono",monospace;color:#bfdbfe}
+
+/* portrait and square: stack the attack scene */
+body.port .s2,body.sq .s2{flex-direction:column-reverse;padding:calc(var(--u)*16) calc(var(--u)*5) calc(var(--u)*20)}
+body.port .term,body.sq .term{width:100%;max-width:none}
+body.port .side,body.sq .side{flex-direction:row;width:auto;gap:calc(var(--u)*5)}
+body.port .hacker{width:calc(var(--u)*30)} body.sq .hacker{width:calc(var(--u)*20)}
+body.sq .count b{font-size:calc(var(--u)*9)}
+body.port .s4,body.sq .s4{padding:0 calc(var(--u)*7)}
+body.port .s4 h1{font-size:calc(var(--u)*13.5)}
+body.sq .s4 h1{font-size:calc(var(--u)*10)}
+/* portrait: --u follows the width, so the 8-character clock must stay under ~16u to fit */
+body.port .clock{font-size:calc(var(--u)*15.5)}
+body.port .s1>div{padding:0 calc(var(--u)*6)}
+body.port .s1 p{font-size:calc(var(--u)*5.2);line-height:1.35}
+body.port .brand{left:50%;transform:translateX(-50%);top:calc(var(--u)*6)}
+body.port .url{right:50%;transform:translateX(50%);bottom:calc(var(--u)*6)}
+body.port .caption{bottom:calc(var(--u)*12)}
+/* very wide strips: keep things compact */
+body.wide .s2 .side{display:none}
+</style></head>
+<body>
+<div class="bg"></div><div class="grid"></div><div class="redwash" id="red"></div><div class="scan" id="scan"></div>
+
+<div class="brand"><img src="../secdes-logo.png" alt="SecDes"><span id="live">● LIVE</span></div>
+<div class="url">secdes.co.id</div>
+
+<section class="scene s1" id="s1"><div><div class="clock"><span id="clk">02.08.54</span><small>WIB</small></div><p>Kantor sudah sepi. Sistem tetap terbuka.</p></div></section>
+
+<section class="scene s2" id="s2">
+  <div class="term"><div class="term-h"><i></i><i></i><i></i>&nbsp; portal-vpn.perusahaan.co.id · log masuk</div><div class="term-b" id="log"></div></div>
+  <div class="side">
+    <svg class="hacker" viewBox="0 0 200 220" aria-hidden="true">
+      <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0b1220"/></linearGradient></defs>
+      <path d="M100 18c-38 0-62 30-62 70v24c-26 10-38 32-40 70l-2 38h208l-2-38c-2-38-14-60-40-70V88c0-40-24-70-62-70z" fill="url(#hg)" stroke="#334155" stroke-width="2"/>
+      <path d="M100 42c-26 0-42 22-42 50v22c10 10 26 16 42 16s32-6 42-16V92c0-28-16-50-42-50z" fill="#020617"/>
+      <circle cx="84" cy="96" r="4" fill="#ef4444"/><circle cx="116" cy="96" r="4" fill="#ef4444"/>
+      <rect x="40" y="160" width="120" height="58" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="3"/>
+      <rect x="52" y="170" width="96" height="38" rx="3" fill="#ef4444" opacity=".25"/>
+    </svg>
+    <div class="count"><b id="cnt">0</b><span>percobaan login gagal</span></div>
+  </div>
+  <p class="caption" id="cap2">Seseorang mencoba masuk.</p>
+</section>
+
+<div class="alert" id="alert">
+  <div class="row1"><span class="badge">BERBAHAYA</span><span class="hd">HandleDesk · SecDes</span></div>
+  <h3>428 login gagal dalam 2 menit ke portal VPN</h3>
+  <p>Sumber 203.0.113.9 · aturan tebak kata sandi massal terlampaui</p>
+  <div class="stamp" id="stamp">✓ DIHENTIKAN · 12 DETIK</div>
+</div>
+
+<section class="scene s4" id="s4">
+  <h1 id="hl"><span>Setiap</span><span>serangan</span><span>punya</span><span><em>percobaan</em></span><span><em>pertama.</em></span></h1>
+  <p id="sub4">SecDes mengenalinya sebelum menjadi masalah.</p>
+</section>
+
+<section class="scene s5" id="s5">
+  <img src="../secdes-logo.png" alt="SecDes">
+  <p class="tag">Hentikan serangan <em>sebelum jadi masalah.</em></p>
+  <p class="sub">Keamanan siber untuk keuangan dan data</p>
+  <span class="u">secdes.co.id</span>
+</section>
+
+<script>
+const L = 20;
+const q = new URLSearchParams(location.search);
+const fixed = q.has('t') ? parseFloat(q.get('t')) : null;
+const start = performance.now();
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+const win = (t, a, b, f = .5) => Math.min(seg(t, a, a + f), 1 - seg(t, b - f, b)); // fade in/out window
+
+function layout() {
+  const w = innerWidth, h = innerHeight, r = w / h;
+  document.body.className = r > 2.6 ? 'land wide' : r > 1.25 ? 'land' : r < .8 ? 'port' : 'sq';
+  document.body.style.setProperty('--u', Math.min(w, h) / 100 + 'px');
+}
+addEventListener('resize', layout); layout();
+
+const users = ['admin_backup', 'admin', 'vpn_test', 'it.support', 'keuangan01', 'root', 'helpdesk'];
+const pw = ['********', 'Passw0rd!', 'admin123', 'qwerty2026', 'Welcome1'];
+function logLines(n, blocked) {
+  const out = [];
+  const first = Math.max(0, n - 14);
+  for (let i = first; i < n; i++) {
+    const s = String(Math.floor(i / 4) % 60).padStart(2, '0');
+    out.push(`<div>02.09.${s} &nbsp;POST /login user=${users[i % users.length]} pass=${pw[i % pw.length]} <span class="f">✕ gagal</span></div>`);
+  }
+  if (blocked) out.push('<div class="blk">02.09.14  SUMBER 203.0.113.9 DIBLOKIR OLEH SECDES</div>', '<div class="ok">02.09.15  alert terkirim ke tim keamanan ✓</div>');
+  return out.join('');
+}
+
+function render(t) {
+  // scene visibility
+  const v1 = win(t, 0, 2.8), v2 = win(t, 2.6, 11.2), v4 = win(t, 11.2, 16.2), v5 = win(t, 16, 20, .6);
+  const aw = win(t, 8.3, 11.2, .4);
+  $('s1').style.opacity = v1; $('s2').style.opacity = v2 * (1 - 0.78 * aw); $('s4').style.opacity = v4; $('s5').style.opacity = v5;
+
+  // clock ticking toward 02.09
+  const sec = 54 + Math.floor(seg(t, 0, 2.6) * 6);
+  $('clk').textContent = sec >= 60 ? '02.09.00' : '02.08.' + sec;
+
+  // attack: counter and log stream
+  const att = ease(seg(t, 3, 7.4));
+  const n = Math.round(att * 428);
+  $('cnt').textContent = n;
+  const blocked = t >= 8.2;
+  $('log').innerHTML = logLines(Math.max(1, Math.round(att * 60)), blocked);
+  $('red').style.opacity = (t > 3.4 && t < 8.2) ? (0.45 + 0.35 * Math.sin(t * 9)) * seg(t, 3.4, 4.4) : 0;
+  $('cap2').textContent = t < 8.2 ? 'Seseorang mencoba masuk.' : 'SecDes mengenalinya.';
+  document.querySelector('.hacker').style.opacity = t < 8.2 ? 1 : 1 - seg(t, 8.2, 9);
+  document.querySelector('.hacker').style.transform = t < 8.2 ? 'none' : `translateX(${seg(t, 8.2, 9) * 6}%) skewX(${Math.sin(t * 40) * 6 * (1 - seg(t, 8.2, 9))}deg)`;
+
+  // scan beam then alert card
+  const sc = seg(t, 7.4, 8.4);
+  $('scan').style.opacity = sc > 0 && sc < 1 ? 1 : 0;
+  $('scan').style.top = (sc * 120 - 20) + '%';
+  const a = win(t, 8.3, 11.2, .4);
+  $('alert').style.opacity = a;
+  $('alert').style.transform = `translate(-50%,-50%) scale(${0.9 + 0.1 * ease(seg(t, 8.3, 8.8))})`;
+  const st = seg(t, 9.2, 9.6);
+  $('stamp').style.opacity = st;
+  $('stamp').style.transform = `scale(${1.6 - 0.6 * ease(st)})`;
+
+  // headline word by word
+  [...$('hl').children].forEach((w, i) => {
+    const p = ease(seg(t, 11.5 + i * .35, 11.9 + i * .35));
+    w.style.opacity = p; w.style.transform = `translateY(${(1 - p) * 30}%)`;
+  });
+  $('sub4').style.opacity = seg(t, 13.6, 14.2);
+
+  // end card
+  $('s5').style.transform = `scale(${0.94 + 0.06 * ease(seg(t, 16, 17))})`;
+  $('live').style.opacity = (Math.floor(t * 2) % 2) ? .35 : 1;
+}
+
+// ?ext=1: a parent page drives the clock with postMessage({t}) (play, pause, seek controls)
+let extT = 0;
+if (q.has('ext')) addEventListener('message', (e) => { if (e.data && typeof e.data.t === 'number') extT = e.data.t; });
+
+function frame() {
+  let t;
+  if (fixed !== null) t = fixed;
+  else if (q.has('ext')) t = extT;
+  else if (q.has('local')) t = ((performance.now() - start) / 1000) % L;
+  else t = (Date.now() / 1000) % L;
+  render(t);
+  if (fixed === null) requestAnimationFrame(frame);
+}
+document.fonts.ready.then(frame); frame();
+</script>
+</body></html>

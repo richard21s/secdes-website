@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>SecDes · Retargeting Display</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Merriweather:wght@400;700;900&family=Roboto:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* A (fictional) business-news article page carrying two SecDes retargeting banners:
+     728x90 leaderboard and 300x250 medium rectangle. 1600 x 1180. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1600px; height: 1180px; overflow: hidden; }
+  body { background: #fff; font-family: "Roboto", Arial, sans-serif; color: #1f2328; }
+  .mast { display: flex; align-items: center; justify-content: space-between; padding: 18px 120px; border-bottom: 1px solid #e5e7eb; }
+  .mast h1 { font: 900 34px "Merriweather", serif; color: #7a1020; letter-spacing: -.5px; }
+  .mast h1 span { color: #1f2328; }
+  .mast nav { display: flex; gap: 26px; font-size: 15px; font-weight: 500; color: #374151; }
+  .mast .sub { padding: 9px 18px; border-radius: 6px; background: #7a1020; color: #fff; font-weight: 500; font-size: 14px; }
+
+  .adlabel { font-size: 11px; color: #9ca3af; letter-spacing: .08em; text-transform: uppercase; text-align: center; margin-bottom: 6px; }
+  .lb-wrap { padding: 18px 0 16px; display: grid; justify-items: center; background: #f6f7f9; border-bottom: 1px solid #e5e7eb; }
+
+  /* 728 x 90 leaderboard */
+  .lb { width: 728px; height: 90px; position: relative; overflow: hidden; display: flex; align-items: center; gap: 20px; padding: 0 18px 0 22px; color: #fff;
+    background: radial-gradient(300px 120px at 85% 50%, rgba(37,99,235,.5), transparent 70%), #0f1c30; font-family: "Plus Jakarta Sans", sans-serif; }
+  .lb img { height: 30px; }
+  .lb .t { flex: 1; } .lb .t b { display: block; font-size: 19px; letter-spacing: -.01em; } .lb .t span { font-size: 13px; color: #bfdbfe; }
+  .lb .cta { padding: 10px 18px; border-radius: 999px; background: #2563eb; font-weight: 700; font-size: 14px; white-space: nowrap; }
+  .ad-i { position: absolute; top: 0; right: 0; width: 15px; height: 15px; background: rgba(255,255,255,.85); color: #00aecd; font: 700 10px Arial; display: grid; place-items: center; border-bottom-left-radius: 4px; }
+
+  .wrap { display: grid; grid-template-columns: 1fr 300px; gap: 56px; width: 1180px; margin: 30px auto 0; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .1em; color: #7a1020; text-transform: uppercase; }
+  .art h2 { margin-top: 10px; font: 900 38px/1.2 "Merriweather", serif; letter-spacing: -.4px; }
+  .by { margin: 16px 0 20px; font-size: 14px; color: #6b7280; }
+  .ph { height: 330px; border-radius: 4px; background: url("/assets/img/city.jpg") center/cover, #cbd5e1; }
+  .cap { margin-top: 8px; font-size: 13px; color: #6b7280; }
+  .art p.b { margin-top: 20px; font: 400 18px/1.75 "Merriweather", serif; color: #1f2937; }
+
+  .side h4 { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 26px 0 10px; color: #374151; }
+  .side li { list-style: none; padding: 12px 0; border-top: 1px solid #e5e7eb; font: 700 15px/1.45 "Merriweather", serif; color: #111827; }
+
+  /* 300 x 250 medium rectangle */
+  .mr { width: 300px; height: 250px; position: relative; overflow: hidden; color: #fff; padding: 20px 20px 18px; font-family: "Plus Jakarta Sans", sans-serif;
+    background: radial-gradient(260px 200px at 100% 0%, rgba(37,99,235,.55), transparent 70%), #0f1c30; display: flex; flex-direction: column; }
+  .mr .k { font: 600 11px "IBM Plex Mono", monospace; color: #93c5fd; letter-spacing: .06em; }
+  .mr h3 { margin-top: 10px; font-size: 23px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+  .mr h3 em { font-style: normal; color: #93c5fd; }
+  .mr .row { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+  .mr .row img { height: 22px; }
+  .mr .cta { padding: 9px 14px; border-radius: 999px; background: #2563eb; font-weight: 700; font-size: 13px; }
+  .mr .dl { margin-top: 8px; font: 500 11px "IBM Plex Mono", monospace; color: #fde68a; }
+</style></head>
+<body>
+  <header class="mast">
+    <h1>Warta<span>Finansial</span></h1>
+    <nav><span>Perbankan</span><span>Fintech</span><span>Pasar Modal</span><span>Teknologi</span><span>Regulasi</span></nav>
+    <span class="sub">Berlangganan</span>
+  </header>
+
+  <div class="lb-wrap">
+    <p class="adlabel">Iklan</p>
+    <div class="lb">
+      <img src="secdes-logo.png" alt="SecDes">
+      <div class="t"><b>Masih mempertimbangkan HandleDesk?</b><span>Akun Jebakan gratis 30 hari, tanpa mengubah sistem inti.</span></div>
+      <span class="cta">Ajukan Uji Coba</span>
+      <span class="ad-i">i</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <article class="art">
+      <p class="kicker">Teknologi · Perbankan</p>
+      <h2>Transaksi Digital Terus Tumbuh, Lembaga Keuangan Perkuat Pengawasan Akses</h2>
+      <p class="by">Redaksi Warta Finansial · Senin, 7 Desember 2026 · 4 menit baca</p>
+      <div class="ph"></div>
+      <p class="cap">Ilustrasi kawasan perkantoran di Jakarta.</p>
+      <p class="b">Pertumbuhan transaksi digital mendorong institusi keuangan menambah lapisan pengawasan terhadap akses ke sistem internal. Sejumlah praktisi keamanan menyebut percobaan login yang tidak wajar kini menjadi salah satu tanda awal yang paling sering…</p>
+    </article>
+
+    <aside class="side">
+      <p class="adlabel" style="text-align:left">Iklan</p>
+      <div class="mr">
+        <span class="k">ANDA BARU SAJA MELIHAT HANDLEDESK</span>
+        <h3>Lihat siapa yang mencoba masuk. <em>Gratis 30 hari.</em></h3>
+        <p class="dl">Pendaftaran ditutup 20 Des 2026</p>
+        <div class="row"><img src="secdes-logo.png" alt="SecDes"><span class="cta">Ajukan Uji Coba</span></div>
+        <span class="ad-i">i</span>
+      </div>
+      <h4>Terpopuler</h4>
+      <ul>
+        <li>Lima Tren Pembayaran Digital Menjelang Akhir Tahun</li>
+        <li>Bank Menengah Percepat Migrasi ke Layanan Cloud</li>
+        <li>Cara Perusahaan Multifinance Menekan Risiko Kredit</li>
+      </ul>
+    </aside>
+  </div>
+</body></html>

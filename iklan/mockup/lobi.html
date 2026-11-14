@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Layar Lobi SecDes</title>
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden}#view{position:absolute;inset:0}
+.bezel{width:100%;height:100%;border-radius:6px;background:#0a0c0f;box-shadow:inset 0 0 0 2px #2b3038}</style>
+</head><body>
+<div id="view"></div>
+<script src="mock.js"></script>
+<script>
+  // Photo: Unsplash (free licence), office lobby with reception desk and lift doors.
+  const S = makeStage({ photo: '../foto/lobi-bersih.jpg', W: 1800, H: 1013 });
+  // the pendant lamp was removed from the photo (lobi-bersih.jpg) so it does not cover the screen
+
+  // wall-mounted 16:9 LED screen on the timber wall behind the reception desk
+  addSpill(S, [560, 230, 720, 440], 'rgba(96,165,250,.30)');
+  addScreen(S, { quad: [[654, 294], [1178, 294], [1178, 590], [654, 590]], w: 524, h: 296, content: { html: '<div class="bezel"></div>' } });
+  addScreen(S, { quad: [[662, 302], [1170, 302], [1170, 582], [662, 582]], w: 1600, h: 882, content: { src: '../video/secdes-videotron.html', fw: 1600, fh: 882 }, glow: .05 });
+</script>
+</body></html>

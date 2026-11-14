@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Kiosk Totem SecDes · Lobi</title>
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden}#view{position:absolute;inset:0}
+.totem{position:absolute;left:785px;top:585px;width:230px;height:600px}
+.totem .body{position:absolute;inset:0 0 34px 0;border-radius:8px;background:linear-gradient(90deg,#0b0c0e,#1b1d21 12%,#141518 88%,#08090a);box-shadow:inset 0 0 0 1px #2c2f35,18px 24px 40px rgba(0,0,0,.35)}
+.totem .scr{position:absolute;left:14px;right:14px;top:16px;height:358px;background:#000;overflow:hidden;box-shadow:0 0 0 1px #000}
+.totem .scr iframe{position:absolute;left:0;top:0;width:540px;height:960px;border:0;transform-origin:0 0;transform:scale(.37)}
+.totem .glare{position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,.12),transparent 40%);pointer-events:none}
+.totem .led{position:absolute;right:22px;top:392px;width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e}
+.totem .lg{position:absolute;left:0;right:0;top:420px;text-align:center}.totem .lg img{width:96px;opacity:.85}
+.totem .base{position:absolute;left:-12px;right:-12px;bottom:0;height:40px;border-radius:4px;background:linear-gradient(#18191c,#0a0b0c);box-shadow:inset 0 1px 0 #34373d}
+.refl{position:absolute;left:773px;top:1185px;width:254px;height:300px;transform:scaleY(-1);transform-origin:top;opacity:.22;filter:blur(1.5px);
+  -webkit-mask-image:linear-gradient(to top,transparent 20%,#000);mask-image:linear-gradient(to top,transparent 20%,#000)}
+.shadow{position:absolute;left:740px;top:1168px;width:330px;height:36px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent)}
+.glow{position:absolute;left:640px;top:1120px;width:520px;height:230px;border-radius:50%;background:radial-gradient(closest-side,rgba(96,165,250,.28),transparent);mix-blend-mode:screen}
+</style>
+</head><body>
+<div id="view"></div>
+<script src="mock.js"></script>
+<script>
+  // Photo: Unsplash (free licence), symmetrical office-tower lobby with a glossy marble floor.
+  // A freestanding digital totem with the portrait SecDes spot stands in the middle of the lobby.
+  const S = makeStage({ photo: '../foto/lobi-lantai.jpg', W: 1800, H: 1350, crop: { x: 150, y: 260, w: 1500, h: 1090 } });
+  const src = '../video/secdes-videotron.html' + (MOCK_T !== null ? '?t=' + MOCK_T : '');
+  const unit = `<div class="body"><div class="scr"><iframe src="${src}" scrolling="no" tabindex="-1"></iframe><div class="glare"></div></div>
+    <span class="led"></span><div class="lg"><img src="../secdes-logo.png" alt=""></div></div><div class="base"></div>`;
+  S.world.insertAdjacentHTML('beforeend', `<div class="shadow"></div><div class="glow"></div>
+    <div class="refl"><div class="totem" style="left:12px;top:0">${unit.replace(src, src)}</div></div>
+    <div class="totem">${unit}</div>`);
+</script>
+</body></html>

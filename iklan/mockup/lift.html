@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Layar Lift SecDes</title>
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden}#view{position:absolute;inset:0}
+.bezel{width:100%;height:100%;border-radius:14px;background:linear-gradient(145deg,#2a2f36,#0b0d10 40%,#15181c);box-shadow:inset 0 0 0 3px #3a4048}</style>
+</head><body>
+<div id="view"></div>
+<script src="mock.js"></script>
+<script>
+  // Photo: Unsplash (free licence), inside a stainless-steel lift facing the doors.
+  const S = makeStage({ photo: '../foto/lift.jpg', W: 1600, H: 1067, crop: { x: 20, y: 30, w: 1100, h: 760 } });
+  // portrait 9:16 screen on the flat panel left of the doors, at eye level
+  addSpill(S, [150, 60, 360, 480], 'rgba(96,165,250,.45)');
+  addScreen(S, { quad: [[240, 140], [414, 140], [414, 446], [240, 446]], w: 174, h: 306, content: { html: '<div class="bezel"></div>' } });
+  addScreen(S, { quad: [[248, 148], [406, 148], [406, 438], [248, 438]], w: 540, h: 990, content: { src: '../video/secdes-videotron.html', fw: 540, fh: 990 }, glow: .08 });
+</script>
+</body></html>
