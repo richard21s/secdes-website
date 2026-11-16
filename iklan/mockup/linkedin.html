@@ -139,7 +139,7 @@ a{color:inherit;text-decoration:none}
 
       <div class="ctab">
         <div class="t"><b>Coba Akun Jebakan gratis 30 hari. Lihat siapa yang mencoba masuk.</b><small>secdes.co.id</small></div>
-        <a class="btn" href="/kontak.html#uji-coba" target="_blank" rel="noopener">Ajukan Uji Coba</a>
+        <a class="btn" href="https://secdes-security-desk.vercel.app/kontak.html#uji-coba" target="_blank" rel="noopener">Ajukan Uji Coba</a>
       </div>
       <div class="soc"><span class="rx"><i style="background:#378fe9">👍</i><i style="background:#df704d">❤</i><i style="background:#6dae4f">👏</i><span id="rc">128</span></span><span>14 komentar · 9 postingan ulang</span></div>
       <div class="acts">
@@ -161,6 +161,7 @@ a{color:inherit;text-decoration:none}
 </main>
 
 <script src="../video/player.js"></script>
+<script src="../video/sound.js" data-sound="manual"></script>
 <script>
   const vid = document.getElementById('vid');
   const P = new SpotPlayer([document.getElementById('vf')], { onTick: (t, playing) => {
@@ -171,7 +172,13 @@ a{color:inherit;text-decoration:none}
   } });
   const fixed = new URLSearchParams(location.search).get('t');
   if (fixed !== null) { P.seek(parseFloat(fixed)); P.pause(); }
+  // LinkedIn plays muted in the feed; the speaker icon on the video turns the soundtrack on, as on LinkedIn.
+  const muteIcon = document.querySelector('.mute .ms');
+  const snd = SecdesSound.attach({ getT: () => P.t, isPlaying: () => P.playing, mount: false,
+    onChange: (on) => { muteIcon.textContent = on ? 'volume_up' : 'volume_off'; } });
+  document.querySelector('.mute').style.cursor = 'pointer';
   vid.addEventListener('click', (e) => {
+    if (e.target.closest('.mute')) { snd.toggle(); return; }
     if (e.target.closest('#bar')) { const r = e.target.closest('#bar').getBoundingClientRect(); P.seek((e.clientX - r.left) / r.width * 20); return; }
     P.toggle();
   });

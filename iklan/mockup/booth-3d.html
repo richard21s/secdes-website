@@ -57,7 +57,7 @@ html,body{height:100%;background:#0a0d12;overflow:hidden}
 .counter-front img{height:46px}
 .counter-front p{font-size:15px;font-weight:600;color:#334155}
 .kiosk-front{background:#0b0d10;padding:10px 10px 0}
-.kiosk-front .s{width:100%;height:150px;background:url(/assets/screens/handledesk-light.png) left top/cover;border-radius:2px}
+.kiosk-front .s{width:100%;height:150px;background:url(../../website/assets/screens/handledesk-light.png) left top/cover;border-radius:2px}
 .kiosk-front .k{margin-top:14px;text-align:center;font:600 11px "IBM Plex Mono",monospace;color:#93c5fd}
 .kiosk-front .b{margin-top:8px;text-align:center}
 .kiosk-front .b img{width:70px}
@@ -127,7 +127,7 @@ face(D, H, `translate3d(${-W / 2}px,0,0) rotateY(90deg)`, 'wall-side',
 face(D, H, `translate3d(${W / 2}px,0,0) rotateY(-90deg)`, 'wall-side',
   `<div class="sidecopy"><h4>Lima produk, <em>beli sesuai kebutuhan</em></h4><div class="plist">${
     [['handledesk','HandleDesk','Deteksi serangan'],['vaultdesk','VaultDesk','Perlindungan data'],['exposuredesk','ExposureDesk','Celah sistem'],['leakdesk','LeakDesk','Kebocoran sandi'],['verifydesk','VerifyDesk','Anti-fraud transfer']]
-    .map(([f, n, d]) => `<div><img src="/assets/products/${f}.svg" alt=""><span>${n}<small>${d}</small></span></div>`).join('')}</div></div>`);
+    .map(([f, n, d]) => `<div><img src="../../website/assets/products/${f}.svg" alt=""><span>${n}<small>${d}</small></span></div>`).join('')}</div></div>`);
 // wall thickness at the front edges
 box(-W / 2 - 15, 0, D / 2 - 10, 30, H, 20, { front: 'white', top: 'white', side: 'grey' });
 box(W / 2 + 15, 0, D / 2 - 10, 30, H, 20, { front: 'white', top: 'white', side: 'grey' });
@@ -167,4 +167,5 @@ const stage = document.getElementById('stage');
 const fit = () => { const s = Math.min(innerWidth / 1800, innerHeight / 1100); stage.style.transform = `translate(${-900 * s}px,${-550 * s}px) scale(${s})`; };
 addEventListener('resize', fit); fit();
 </script>
+<script src="../video/sound.js"></script>
 </body></html>
