@@ -82,6 +82,8 @@ body.sq .s4 h1{font-size:calc(var(--u)*10)}
 body.port .clock{font-size:calc(var(--u)*15.5)}
 body.port .s1>div{padding:0 calc(var(--u)*6)}
 body.port .s1 p{font-size:calc(var(--u)*5.2);line-height:1.35}
+/* square: the 8-character clock plus "WIB" must also stay inside the frame */
+body.sq .clock{font-size:calc(var(--u)*15.5)}
 body.port .brand{left:50%;transform:translateX(-50%);top:calc(var(--u)*6)}
 body.port .url{right:50%;transform:translateX(50%);bottom:calc(var(--u)*6)}
 body.port .caption{bottom:calc(var(--u)*12)}
@@ -210,15 +212,25 @@ function render(t) {
 let extT = 0;
 if (q.has('ext')) addEventListener('message', (e) => { if (e.data && typeof e.data.t === 'number') extT = e.data.t; });
 
+let lastT = 0;
 function frame() {
   let t;
   if (fixed !== null) t = fixed;
   else if (q.has('ext')) t = extT;
   else if (q.has('local')) t = ((performance.now() - start) / 1000) % L;
   else t = (Date.now() / 1000) % L;
+  lastT = t;
   render(t);
   if (fixed === null) requestAnimationFrame(frame);
 }
 document.fonts.ready.then(frame); frame();
+
+// Opened on its own (not inside a mockup, not a frozen still): offer the soundtrack, following this page's clock.
+if (window.top === window && fixed === null && !q.has('ext')) {
+  const sc = document.createElement('script');
+  sc.src = 'sound.js'; sc.dataset.sound = 'manual';
+  sc.onload = () => SecdesSound.attach({ getT: () => lastT });
+  document.body.appendChild(sc);
+}
 </script>
 </body></html>
