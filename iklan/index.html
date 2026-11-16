@@ -58,7 +58,7 @@ footer{padding:24px;text-align:center;font-size:13px;color:var(--ink2)}
 
 <main class="in">
   <section id="awareness">
-    <h2>4.1 High-Profile Brand Awareness Advertisement<small>Video videotron 20 detik tanpa suara. Rasio menyesuaikan media: 16:9 untuk billboard dan lobi, 9:16 untuk lift, 1:1 untuk LinkedIn.</small></h2>
+    <h2>4.1 High-Profile Brand Awareness Advertisement<small>Video 20 detik dengan voice-over, musik, dan efek suara (klik “Nyalakan suara”). Rasio menyesuaikan media: 16:9 untuk billboard dan lobi, 9:16 untuk lift, 1:1 untuk LinkedIn.</small></h2>
 
     <div class="player">
       <div class="ptabs" id="ratios">
@@ -119,6 +119,7 @@ footer{padding:24px;text-align:center;font-size:13px;color:var(--ink2)}
 <footer>Foto latar mockup: Unsplash (lisensi bebas). Nama penerima, perusahaan, dan data dalam materi ini bersifat fiktif.</footer>
 
 <script src="video/player.js"></script>
+<script src="video/sound.js" data-sound="manual"></script>
 <script>
   // scaled previews: each page renders at its natural size and is scaled to the card width
   const shots = [...document.querySelectorAll('.shot')];
@@ -159,5 +160,7 @@ footer{padding:24px;text-align:center;font-size:13px;color:var(--ink2)}
   document.getElementById('rs').onclick = () => P.restart();
   seek.oninput = () => P.seek(parseFloat(seek.value));
   document.querySelectorAll('.scenes button').forEach((b) => b.onclick = () => { P.seek(parseFloat(b.dataset.t)); P.play(); });
+  // soundtrack follows this player (play, pause, seek, scene buttons)
+  SecdesSound.attach({ getT: () => P.t, isPlaying: () => P.playing, mount: document.querySelector('.ctl') });
 </script>
 </body></html>
